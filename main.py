@@ -75,3 +75,4 @@ test2 = Monnaie_Gloutonne_Modifie2(S,15,D)
 print(test2)
 
 
+print(test2)
