@@ -31,52 +31,53 @@ def Monnaie_Gloutonne_Modifie1(S,M,D):       ##Avec Tolérance pour itérations 
         tolerance += 1
         for idx, valeur in reversed(list(enumerate(S))):
             while valeur <= Mprim and D[idx] != 0:
-                print(Mprim)
-                print(D[idx], idx)
                 Mprim -= valeur
                 D[idx] -= 1
                 T[idx] += 1
-    print(Mprim)
     QOptimal = sum(T)
     if tolerance == 100:
         return f"Insuffisament des billets/pièces... Montant rendu = {M-Mprim}, Tuple : {T}"
     return f"Tuple des pièces : {T}, Nombre des billets/pièces optimal : {QOptimal}"
 
-
-def Monnaie_Gloutonne_Modifie2(S,M,D):
-    Total=0
-    Mprim = M
-    T=[0]*len(S)
-    for idx, valeur in reversed(list(enumerate(S))):
-         if valeur <= Mprim and D[idx] != 0:
-             print(valeur)
-             break
-    for ind, v in enumerate(S[:idx+1]):
-        print(v, D[ind])
-        Total += v*D[ind]
-        print(Total)
-    if Total < M:
-        return f"Insuffisament des billets/pièces... Total = {Total}"
-    while Mprim != 0:
-        for idx, valeur in reversed(list(enumerate(S))):
-            while valeur <= Mprim and D[idx] != 0:
-                print(Mprim)
-                print(D[idx], idx)
-                Mprim -= valeur
-                D[idx] -= 1
-                T[idx] += 1
-    print(Mprim)
-    QOptimal = sum(T)
-    return f"Tuple des pièces : {T}, Nombre des billets/pièces optimal : {QOptimal}"
-
 S=[1,2,5,10,22] 
 D=[3,0,0,1,0]
-test2 = Monnaie_Gloutonne_Modifie2(S,15,D)
-print(test2)
+test2 = Monnaie_Gloutonne_Modifie1(S,12,D)
+#print(test2)
 
+def Monnaie_Gloutonne_Modifie2(S,M,D):
+    tolerance = 0
+    Mprim = M
+    T=[0]*len(S)
+    Total = 0
+    for idx, valeur in reversed(list(enumerate(S))):
+        if Mprim <=valeur:
+            break
+    print(S[:idx-1])
+    for ind,v in enumerate(S[:idx-1]):
+        Total += v*D[ind]
+    if Total < M:
+        return f"Insuffisament des billets/pièces... Montant total = {Total}"
 
-print(test2)
+    while Mprim != 0 and tolerance < 100:
+        tolerance += 1
+        for idx, valeur in reversed(list(enumerate(S))):
+                dispo = D[idx]
+                nbBillets = Mprim // valeur
+                if nbBillets <= dispo:
+                    Mprim = Mprim % valeur
+                    T[idx] = nbBillets
+                    D[idx] = dispo - nbBillets
+                else:
+                    T[idx] = dispo
+                    Mprim = Mprim - valeur*dispo
+                    D[idx] = 0
+    QOptimal = sum(T)
+    if tolerance == 100:
+        return f"Rendu impossible, aucune combinaison des billets trouvé"
+    return f"Tuple des pièces : {T}, Nombre des billets/pièces optimal : {QOptimal}, Disponibilité de pièces : {D}"
 
-print(test2)
+S=[1,2,5,10,20] 
+D=[0,2,1,0,0]
+test3 = Monnaie_Gloutonne_Modifie2(S,6,D)
+print(test3)
 
-print(test2)
