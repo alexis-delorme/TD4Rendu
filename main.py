@@ -52,7 +52,6 @@ def Monnaie_Gloutonne_Modifie2(S,M,D):
     for idx, valeur in reversed(list(enumerate(S))):
         if Mprim <=valeur:
             break
-    print(S[:idx-1])
     for ind,v in enumerate(S[:idx-1]):
         Total += v*D[ind]
     if Total < M:
@@ -79,5 +78,40 @@ def Monnaie_Gloutonne_Modifie2(S,M,D):
 S=[1,2,5,10,20] 
 D=[0,2,1,0,0]
 test3 = Monnaie_Gloutonne_Modifie2(S,6,D)
-print(test3)
+#print(test3)
+
+
+
+## Chemin minimal dans un arbre
+
+def Monnaie_Graphe(S,M):
+    FileF = []
+    FileF.append(M)
+    Noeuds = [M]
+    ArbreA = [[M,[]]]
+    while FileF != []:
+        Parent = FileF[0]
+        print(Parent)
+        for valeur in S:
+            noeud = Parent - valeur
+            if valeur <= Parent:
+                if noeud not in Noeuds:
+                    Noeuds.append(noeud)
+                    ArbreA.append([noeud, [Parent]])
+                    FileF.append(noeud)
+                else:
+                    index = [y[0] for y in ArbreA].index(noeud)
+                    ArbreA[index][1].append(Parent)
+                #print(Parent) 
+                if Parent == 0:
+                    return ArbreA
+        FileF.pop(0)
+    return ArbreA
+    #return T, QOptimal
+
+S=[1,7,23]
+M=28
+Test4 = Monnaie_Graphe(S,M)
+print(Test4)
+
 
