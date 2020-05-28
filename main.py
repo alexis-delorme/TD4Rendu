@@ -1,4 +1,8 @@
 import math
+from graphviz import Digraph
+
+graph = Digraph(comment='Arbre',format='png')
+graph.attr(size='50,50!')
 
 S=[1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]     ##Tuple, valeur de pièces
 T=[]                                                    ##Tuple, pièces à rendre
@@ -91,7 +95,6 @@ def Monnaie_Graphe(S,M):
     ArbreA = [[M,[]]]
     while FileF != []:
         Parent = FileF[0]
-        print(Parent)
         for valeur in S:
             noeud = Parent - valeur
             if valeur <= Parent:
@@ -106,12 +109,22 @@ def Monnaie_Graphe(S,M):
                 if Parent == 0:
                     return ArbreA
         FileF.pop(0)
-    return ArbreA
+    return (ArbreA, Noeuds)
     #return T, QOptimal
 
 S=[1,7,23]
 M=28
 Test4 = Monnaie_Graphe(S,M)
-print(Test4)
+#print(Test4)
 
+def Graph_Arbre(arbre_noeuds):
+    arbre = arbre_noeuds[0]
+    for liens in arbre[:-1]:
+        Parents = liens[1]
+        noeud = str(liens[0])
+        for parent in Parents:
+            graph.edge(str(parent), noeud, label=str(parent - int(noeud)))
+    print(graph.source)
+    #graph.render('Arbre.gv', view=True)
 
+#Graph_Arbre(Test4)
