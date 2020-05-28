@@ -97,7 +97,7 @@ def Monnaie_Graphe(S,M):
         Parent = FileF[0]
         for valeur in S:
             noeud = Parent - valeur
-            if valeur <= Parent:
+            if valeur < Parent:
                 if noeud not in Noeuds:
                     Noeuds.append(noeud)
                     ArbreA.append([noeud, [Parent]])
@@ -105,21 +105,37 @@ def Monnaie_Graphe(S,M):
                 else:
                     index = [y[0] for y in ArbreA].index(noeud)
                     ArbreA[index][1].append(Parent)
-                #print(Parent) 
-                if Parent == 0:
-                    return ArbreA
+            if noeud == 0:
+                ArbreA.append([0,[Parent]])
+                return ArbreA, Noeuds
         FileF.pop(0)
     return (ArbreA, Noeuds)
     #return T, QOptimal
 
-S=[1,7,23]
+S=[1,7,14,23]
 M=28
 Test4 = Monnaie_Graphe(S,M)
-#print(Test4)
+
+def Q_Optimal(arbre_noeuds, S, M):
+    arbre = arbre_noeuds[0]
+    temp=0
+    T = [0]*len(S)
+    while M != 0:
+        temp1 = temp
+        index = [y[0] for y in arbre].index(temp)
+        if index == 0:
+            return T
+        temp = arbre[index][1][0]
+        M -= temp
+        valeur = S.index(temp - temp1)
+        T[valeur] += 1
+    return T
+
+print(Q_Optimal(Test4,S,M))
 
 def Graph_Arbre(arbre_noeuds):
     arbre = arbre_noeuds[0]
-    for liens in arbre[:-1]:
+    for liens in arbre:
         Parents = liens[1]
         noeud = str(liens[0])
         for parent in Parents:
