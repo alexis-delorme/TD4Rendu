@@ -110,9 +110,8 @@ def Monnaie_Graphe(S,M):
                 return ArbreA, Noeuds
         FileF.pop(0)
     return (ArbreA, Noeuds)
-    #return T, QOptimal
 
-S=[1,7,14,23]
+S=[1,7,23]
 M=28
 Test4 = Monnaie_Graphe(S,M)
 
@@ -143,7 +142,35 @@ def Graph_Arbre(arbre_noeuds):
     print(graph.source)
     graph.render('Arbre.gv', view=True)
 
-Graph_Arbre(Test4)
+#Graph_Arbre(Test4)
+
+## Algorithme de Programmation Dynamique
+
+def Monnaie_dynamique(S,M):
+    Szero=S
+    Szero.insert(0,0)
+    w, h = M+1, len(Szero);
+    mat = [[0 for x in range(w)] for y in range(h)] 
+    for i in range(len(Szero)):
+        for m in range(M+1):
+            temp = []
+            if i == 0:
+                mat[i][m] = float('inf')
+            elif m == 0:
+                mat[i][m] = 0
+            else:
+                if m - Szero[i] >= 0:
+                    temp.append(1 + mat[i][m - Szero[i]])
+                if i >= 1:
+                    temp.append(mat[i-1][m])
+                mat[i][m] = min(temp)
+    return mat[i][m]
 
 
-def 
+
+S = [1,7,23]
+M = 28
+Test4 = Monnaie_Graphe(S,M)
+print(Q_Optimal(Test4,S,M))
+Monn = Monnaie_dynamique(S,M)
+print(Monn)
