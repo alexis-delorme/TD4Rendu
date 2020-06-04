@@ -141,6 +141,9 @@ def Graph_Arbre(arbre_noeuds):
         for parent in Parents:
             graph.edge(str(parent), noeud, label=str(parent - int(noeud)))
     print(graph.source)
-    #graph.render('Arbre.gv', view=True)
+    graph.render('Arbre.gv', view=True)
 
-#Graph_Arbre(Test4)
+Graph_Arbre(Test4)
+
+
+def 
