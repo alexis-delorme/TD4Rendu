@@ -174,3 +174,44 @@ Test4 = Monnaie_Graphe(S,M)
 print(Q_Optimal(Test4,S,M))
 Monn = Monnaie_dynamique(S,M)
 print(Monn)
+
+
+def Monnaie_dynamique_modifie(S,M):
+    T = [0]*len(S)
+    w, h = M+1, len(S)+1;
+    mat = [[0 for x in range(w)] for y in range(h)] 
+    for i in range(len(S)+1):
+        for m in range(M+1):
+            temp = []
+            if i == 0:
+                mat[i][m] = float('inf')
+            elif m == 0:
+                mat[i][m] = 0
+            else:
+                if m - S[i-1] >= 0:
+                    temp.append(1 + mat[i][m - S[i-1]])
+                else:
+                    temp.append(float('inf'))
+                if i >= 1:
+                    temp.append(mat[i-1][m])
+                else:
+                    temp.append(float('inf'))
+                mat[i][m] = min(temp)    
+    print(mat)
+    mat = mat[1:]
+    print(mat)
+    while M != 0:
+        k = len(S) - 1
+        while k > 0 and mat[k][M] == mat[k-1][M]:
+            k -= 1
+        T[k] += 1
+        M -= S[k]
+    print(T)
+    return mat
+
+S = [1,7,23]
+M = 28
+Test4 = Monnaie_Graphe(S,M)
+print(Q_Optimal(Test4,S,M))
+Monn = Monnaie_dynamique_modifie(S,M)
+print(Monn)
