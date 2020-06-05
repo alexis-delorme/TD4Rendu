@@ -1,18 +1,30 @@
 ### imports ###
 from main import*
 
+
+###  Définitions des variables ###
+#   S = Liste des valeurs disponible (en centimes). ex : 
+S = [1,2,5,10,20,50,100,200,500]  # les valeurs sont 1 centimes, 2 centimes... jusqu'à 500 centimes
+
+#   T = Combinaison des valeurs utilisé. ex :
+T = [0, 2, 4, 5, 6]     #la valeur S[0] est utilisée 0 fois, S[1] deux fois, S[3] quatre fois etc.
+
+#   M = Montant que l'on cherche à rendre. Uniquement des nombres entiers. ex :
+M = 1045    #1045 centimes --> 10euros 45 centimes
+
+#   D = Liste des disponibilités corréspondant à des valeurs dans la liste S
+D = [1, 3, 4, 12, 4]     #il en reste 1 pièce de la valeur S[0], 3 de la valeur S[1], 12 de la valeur S[3] etc.
+
 ####    Méthode Gloutonne   #####
 
-S=[1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]     ##Liste, valeur de pièces
-T=[]                                                    ##Liste, pièces à rendre
-M=0                                                     ##Integer, montant à rendre
-D=[3,4,3,5,3,2,5,6,7,11,2,12,1]                         ##Liste, disponibilité de chaque valeur 
+M=0                                                    
+D=[3,4,3,5,3,2,5,6,7,11,2,12,1]                         
 Q=0
 QOptimal=0
 
 print('~~~ Tests pour vérifier la fonctionnement de la méthode Gloutonne ~~~')
-S = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]     ##Liste, valeur de pièces
-M = 23665                                                 ##Int, montant à rendre
+S = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]     
+M = 23665                                                 
 test1=Monnaie_Gloutonne(S,M)
 print(test1)
 
@@ -23,7 +35,7 @@ M = 28
 test2 = Monnaie_Gloutonne(S,M)
 print(test2)
 
-print('n')
+print('\n')
 print('~~~ Tests pour vérifier la fonctionnement de la méthode Gloutonne modifié ~~~')
 print('Test d\'un cas où la disponibilité limite le choix qu\'on pourrait faire')
 S = [4,7,23] 
@@ -42,7 +54,7 @@ print(test4)
 
 
 print('\n')
-print('Test d\'un cas où il n\'y a pas assez des pièces disponible')
+print('Test d\'un cas où il n\'y a aucune combinaison possible pour le montant M')
 S = [100,300,450,646,1500] 
 D = [0,10,6,5,3]
 M = 12001
@@ -64,10 +76,10 @@ M = 28
 test7 = Monnaie_Graphe(S,M)
 print(Q_Optimal(test7,S,M))
 
-print('\n')
-print('Test de la méthode Graph_arbre qui dessine l\'arbre')
-#   Enlève le # pour sauvegarder et afficher l'arbre soius fichier .png
-#Graph_Arbre(test7)
+##  print('\n')
+##  print('Test de la méthode Graph_arbre qui dessine l\'arbre')
+##  #   Enlève les ## pour sauvegarder et afficher l'arbre sous fichier .png
+##  #Graph_Arbre(test7)
 
 
 print('\n')
