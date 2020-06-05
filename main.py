@@ -198,20 +198,27 @@ def Monnaie_dynamique_modifie(S,M):
                     temp.append(float('inf'))
                 mat[i][m] = min(temp)    
     print(mat)
-    mat = mat[1:]
+    matmodi = mat[1:]
     print(mat)
     while M != 0:
         k = len(S) - 1
-        while k > 0 and mat[k][M] == mat[k-1][M]:
+        while k > 0 and matmodi[k][M] == matmodi[k-1][M]:
             k -= 1
         T[k] += 1
         M -= S[k]
     print(T)
-    return mat
+    return (mat, mat[i][m], T)
 
+
+def Complexite(mat):
+    matList = list((j for i in mat for j in i)) 
+    return len(matList)
+    
 S = [1,7,23]
 M = 28
 Test4 = Monnaie_Graphe(S,M)
 print(Q_Optimal(Test4,S,M))
 Monn = Monnaie_dynamique_modifie(S,M)
 print(Monn)
+
+print(Complexite(Monn[0]))
