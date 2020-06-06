@@ -94,7 +94,7 @@ start1 = time.time()
 test8 = Monnaie_dynamique(S,M)
 end1 = time.time()
 print('Temps écoulé = ', end1 - start1, 'seconds')
-print(test8)
+print('Combinaison optimale (QOpt) :', test8)
 
 print('Test d\'un cas avec un nombre des combinaisons important')
 S = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]
@@ -103,7 +103,7 @@ start2 = time.time()
 test9 = Monnaie_dynamique(S,M)
 end2 = time.time()
 print('Temps écoulé = ', end2 - start2, 'seconds')
-print(test9)
+print('Combinaison optimale (QOpt) :', test9)
 
 
 print('~~~ Tests pour vérifier la fonctionnement de la méthode Programmation Dynamique modifié ~~~')
