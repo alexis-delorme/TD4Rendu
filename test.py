@@ -1,4 +1,4 @@
-### imports ###
+import time
 from main import*
 
 
@@ -66,8 +66,12 @@ print('\n')
 print('~~~ Tests pour vérifier la fonctionnement de la méthode de l\'arbre ~~~')
 S = [1,10,200,300,4000]
 M = 4654
+start = time.time()
 test6 = Monnaie_Graphe(S,M)
-print(Q_Optimal(test6,S,M))
+Qopt = Q_Optimal(test6,S,M)
+end = time.time()
+print('Temps écoulé = ', end - start, 'seconds')
+print(Qopt)
 
 print('\n')
 print('Test du cas où la méthode Gloutonne a échouée')
@@ -84,15 +88,21 @@ print(Q_Optimal(test7,S,M))
 
 print('\n')
 print('~~~ Tests pour vérifier la fonctionnement de la méthode Programmation Dynamique ~~~')
-S = [1,7,23]
-M = 28
+S = [1,10,200,300,4000]
+M = 4654
+start = time.time()
 test8 = Monnaie_dynamique(S,M)
+end = time.time()
+print('Temps écoulé = ', end - start, 'seconds')
 print(test8)
 
 print('Test d\'un cas avec un nombre des combinaisons important')
 S = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]
 M = 23665
+start = time.time()
 test9 = Monnaie_dynamique(S,M)
+end = time.time()
+print('Temps écoulé = ', end - start, 'seconds')
 print(test9)
 
 
@@ -105,3 +115,5 @@ print('Combinaison optimale (QOpt) :', test10[1])
 print('Liste des pièces utilisées :', test10[2])
 complexite = Complexite(test10[0])
 print(complexite)
+
+
