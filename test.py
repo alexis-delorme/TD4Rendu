@@ -96,6 +96,7 @@ end1 = time.time()
 print('Temps écoulé = ', end1 - start1, 'seconds')
 print('Combinaison optimale (QOpt) :', test8)
 
+print('\n')
 print('Test d\'un cas avec un nombre des combinaisons important')
 S = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000]
 M = 23665
@@ -105,7 +106,7 @@ end2 = time.time()
 print('Temps écoulé = ', end2 - start2, 'seconds')
 print('Combinaison optimale (QOpt) :', test9)
 
-
+print('\n')
 print('~~~ Tests pour vérifier la fonctionnement de la méthode Programmation Dynamique modifié ~~~')
 S = [1,10,200,300,4000]
 M = 4654
